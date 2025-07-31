@@ -6,7 +6,7 @@
 
 <template>
   <header :class="`color-${id}`">Лого</header>
-  <Button />
+  <Button>Сохранить</Button>
   <main :id>Контент</main>
 </template>
 
