@@ -2,10 +2,9 @@
 </script>
 
 <template>
-  <header>Лого</header>
+  <header></header>
   <main>Привет!</main>
   <footer>Футер</footer>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
