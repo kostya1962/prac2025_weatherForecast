@@ -1,10 +1,10 @@
 <script setup>
+  const id = "green";
 </script>
 
 <template>
-  <header></header>
-  <main>Привет!</main>
-  <footer>Футер</footer>
+  <header :class="`color-${id}`">Лого</header>
+  <main :id>Контент</main>
 </template>
 
 <style scoped></style>
