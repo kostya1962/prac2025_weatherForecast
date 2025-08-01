@@ -6,6 +6,10 @@
     label: "Влажность",
     stat: "90%"
   };
+
+  function getCity(city) {
+    console.log(city);
+  }
 </script>
 
 <template>
@@ -14,7 +18,7 @@
     <Statistic label="Осадки" stat="0%"/>
     <Statistic stat="90%"/>
 
-    <SelectCity />
+    <SelectCity @select-city="getCity" />
   </main>
 </template>
 

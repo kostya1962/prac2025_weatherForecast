@@ -2,9 +2,6 @@
 
 <template>
     <button class="button">
-        <div>
-            <slot name="green"/>
-        </div>
         <slot />
     </button>
 </template>
