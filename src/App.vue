@@ -1,20 +1,31 @@
 <script setup>
+  import { ref, computed } from 'vue';
   import Statistic from "./components/Statistic.vue";
   import SelectCity from "./components/SelectCity.vue";
 
-  const statistic = {
-    label: "Влажность",
-    stat: "90%"
-  };
+  let savedCity = ref("Chebocksary");
+  const statistic = ref({
+    humidity: 90,
+  });
+
+  const statModifed = computed(() => {
+      return {
+        label: "Влажность",
+        stat: statistic.value.humidity + '%',
+      };
+  });
 
   function getCity(city) {
-    console.log(city);
+    statistic.value.humidity = 20;
+    savedCity.value = city; 
   }
+
 </script>
 
 <template>
   <main class="main">
-    <Statistic v-bind="statistic"/>
+    {{ savedCity }}
+    <Statistic v-bind="statModifed"/>
     <Statistic label="Осадки" stat="0%"/>
     <Statistic stat="90%"/>
 

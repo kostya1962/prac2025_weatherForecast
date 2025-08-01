@@ -1,24 +1,34 @@
 <script setup>
+import { ref } from 'vue';
 import Button from "./Button.vue";
 import iconLocation from "../icons/iconLocation.vue";
 
+let isEdited = ref(false); //реактивное состояние кнопки изменения города
+
 const emit = defineEmits({
     selectCity(payload) {
-        console.log(`Validatig payload: ${payload}`);
         return payload ? true : false;
     },
 });
 
 function select() {
+    isEdited.value = false;
     emit("selectCity", "Paris");
+}
+
+function edit() {
+    isEdited.value = true;
 }
 </script>
 
 <template>
-    <Button @click="select()">
+    {{ isEdited }}
+    <Button @click="edit()">
         <iconLocation />
         Изменить город
     </Button>
-    <input />
-    <Button> Сохранить </Button>
+    <div>
+        <input />
+        <Button @click="select()"> Сохранить </Button>
+    </div>
 </template>
