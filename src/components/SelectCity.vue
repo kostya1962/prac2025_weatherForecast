@@ -22,13 +22,12 @@ function edit() {
 </script>
 
 <template>
-    {{ isEdited }}
-    <Button @click="edit()">
-        <iconLocation />
-        Изменить город
-    </Button>
-    <div>
+    <div v-if="isEdited"> <!-- скритие поля ввода города для состояние без редактирования -->
         <input />
         <Button @click="select()"> Сохранить </Button>
     </div>
+    <Button v-else @click="edit()">
+        <iconLocation />
+        Изменить город
+    </Button>
 </template>
