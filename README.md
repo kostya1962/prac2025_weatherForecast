@@ -13,6 +13,6 @@
 - Значки (WetherIcon)
 - Паенль (PanelImage)
 - Выбор города (CitySelect)
-- Поля ввода города (InputCity)
+- Поле ввода города (InputCity)
 
 (доделываю - альфа версия)

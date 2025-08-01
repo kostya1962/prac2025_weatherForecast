@@ -4,15 +4,27 @@
   import SelectCity from "./components/SelectCity.vue";
 
   let savedCity = ref("Chebocksary");
-  const statistic = ref({
+  const statistic = ref({ //реактивный объект статистики
     humidity: 90,
+    rain: 0,
+    wind: 3,
   });
 
   const statModifed = computed(() => {
-      return {
-        label: "Влажность",
-        stat: statistic.value.humidity + '%',
-      };
+      return [
+        {
+          label: "Влажность",
+          stat: statistic.value.humidity + '%', //вычисляемая часть
+        },
+        {
+          label: "Осадки",
+          stat: statistic.value.rain + '%',
+        },
+        {
+          label: "Ветер",
+          stat: statistic.value.wind + 'м/с',
+        }
+      ]
   });
 
   function getCity(city) {
@@ -24,10 +36,10 @@
 
 <template>
   <main class="main">
-    {{ savedCity }}
-    <Statistic v-bind="statModifed"/>
-    <Statistic label="Осадки" stat="0%"/>
-    <Statistic stat="90%"/>
+    <div id="city">{{ savedCity }}</div>
+
+    <!-- Мультиплексирование статистики, данные которой динамичкси (передаём как html-аргкмент) могут пересчитываться и всавляться в шаблон -->
+    <Statistic v-for="item in statModifed" v-bind="item" :key="item.label"/>
 
     <SelectCity @selectCity="getCity" />
   </main>
