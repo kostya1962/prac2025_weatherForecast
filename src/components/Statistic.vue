@@ -21,7 +21,8 @@
     }
 
     .stat-name {
-        font-weight: 600;
+        text-transform: uppercase;
+        font-weight: 700;
     }
 
     .stat-value {
