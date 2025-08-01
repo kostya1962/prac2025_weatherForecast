@@ -29,7 +29,7 @@
     <Statistic label="Осадки" stat="0%"/>
     <Statistic stat="90%"/>
 
-    <SelectCity @select-city="getCity" />
+    <SelectCity @selectCity="getCity" />
   </main>
 </template>
 

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --color-primary: #000;
   --color-bg: #FFE09D;
@@ -7,7 +11,7 @@
   --gradient-img: linear-gradient(152.19deg, rgba(255, 234, 0, 0.9) -0.04%, rgba(255, 9, 9, 0.9) 100%);
   --gradient-btn: linear-gradient(90.8deg, #FFEA00 0.2%, #FF0909 100%);
   --gradient-btn-invert: linear-gradient(90.8deg, #FF0909 0.2%, #FFEA00 100%);
-  --color-input-let: #3F4958;
+  --color-text-placeholder: #3F4958;
   --color-bg-info: #E76161;
   --font: "Montserrat", sans-serif;
 }
