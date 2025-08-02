@@ -1,8 +1,9 @@
 <script setup>
-    const data = defineModel({ type: String, required: true, });
+    const data = defineModel({ type: String, required: true, }); // создадим 2-ух сторонную привязку для передачи названия города между Input и SelectCity
 </script>
 
 <template>
+    <!-- обмен даннми без emit и prop -->
     <input v-model="data" class="input" type="text" />
 </template>
 
