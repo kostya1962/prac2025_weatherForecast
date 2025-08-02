@@ -1,21 +1,25 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import Button from "./Button.vue";
 import iconLocation from "../icons/iconLocation.vue";
 import InputCity from './InputCity.vue';
 
 let isEdited = ref(false); //реактивное состояние кнопки изменения города
-let city = ref("Chebocksary"); // реактивное имя города (изначально не определено)
+let city = ref("Чебоксары"); // реактивное имя города (изначально не определено)
 
-const emit = defineEmits({
+const emit = defineEmits({ // событие для передачи города в родительский компонент
     selectCity(payload) {
         return payload ? true : false;
     },
 });
 
+onMounted(() => { //необходимо, чтобы при загрузке компонента название активного города передавался родителю 
+    emit('selectCity', city.value);
+});  
+
 function select() {
     isEdited.value = false;
-    emit("selectCity", "Paris");
+    emit("selectCity", city.value); // город выбран
 }
 
 function edit() {
