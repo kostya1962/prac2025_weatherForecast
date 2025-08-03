@@ -16,7 +16,7 @@
         padding: 15px 20px;
         font-size: 18px;
         background: var(--color-primary-inverted);
-        box-shadow: 1px 2px 4px 0px #222831;
+        box-shadow: 1px 2px 4px 0px var(--color-shadow);
         color: var(--color-primary);
         width: 260px;
         height: 53px;
