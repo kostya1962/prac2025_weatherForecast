@@ -5,26 +5,26 @@
   import SelectCity from "./components/SelectCity.vue";
 
   const API_ENDPOINT = "http://api.weatherapi.com/v1"; //домен источника информации о погоде
-
-  const statistic = ref({ //реактивный объект статистики
-    humidity: 90,
-    rain: 0,
-    wind: 3,
-  });
+  
+  //реактивный объект статистики
+  const statistic = ref();
 
   const statModifed = computed(() => {
+      if(!statistic.value) {
+        return [];
+      }
       return [
         {
           label: "Влажность",
-          stat: statistic.value.humidity + '%', //вычисляемая часть
+          stat: statistic.value.current.humidity + ' %', //вычисляемая часть
         },
         {
-          label: "Осадки",
-          stat: statistic.value.rain + '%',
+          label: "Облачность",
+          stat: statistic.value.current.cloud + ' %',
         },
         {
           label: "Ветер",
-          stat: statistic.value.wind + 'м/с',
+          stat: (Math.round(parseInt(statistic.value.current.wind_kph) * (1000 / 3600) * 10) / 10) + ' м/с',
         }
       ]
   });
@@ -38,8 +38,7 @@
       days: 7,
     });
     const res = await fetch(`${API_ENDPOINT}/forecast.json?${params.toString()}`); //отправка запроса по указанному URL и получение ответа в виде JSON (await приобстанавливает функцию пока не придет ответ от сервера)
-    const data = await res.json(); // преобразование строки в объект (так как строка JSON очень большая нужно дождаться завершения преобразования)
-    console.log(data);
+    statistic.value = await res.json(); // преобразование строки в объект (так как строка JSON очень большая нужно дождаться завершения преобразования)
   }
 
 </script>
