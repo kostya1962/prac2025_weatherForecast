@@ -32,7 +32,7 @@ function edit() {
     {{ city }}
     <div class="city-select">
         <div v-if="isEdited" class="city-input"> <!-- скритие поля ввода города для состояние без редактирования -->
-            <InputCity  v-model="city" placeholder="Введите город" />
+            <InputCity  v-model="city" placeholder="Введите город" @keyup.enter="select()" />
             <Button @click="select()"> Сохранить </Button>
         </div>
         <Button v-else @click="edit()">
