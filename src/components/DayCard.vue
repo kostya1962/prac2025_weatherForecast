@@ -41,6 +41,7 @@
         color: var(--color-primary-inverted);
         border: none;
         cursor: pointer;
+        width: 100%;
     }
 
     .card:hover{

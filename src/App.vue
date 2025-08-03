@@ -16,9 +16,6 @@
   const errorMap = new Map([ [1006, "Не удалось найти город"] ]); // словарь возможных ошибок на русском
   
   const statModifed = computed(() => {
-      if(!statistic.value) {
-        return [];
-      }
       return [
         {
           label: "Влажность",
@@ -50,7 +47,7 @@
     const res = await fetch(`${API_ENDPOINT}/forecast.json?${params.toString()}`); //отправка запроса по указанному URL и получение ответа в виде JSON (await приобстанавливает функцию пока не придет ответ от сервера)
     if(res.status != 200){
       error.value = await res.json(); // в случае ошибки сохраняем полученную от сервера информацию
-      statistic.value = null;
+      statistic.value = null; // объект с информацией о погоде отсутсвует
       return;
     } 
     error.value = null;
@@ -63,18 +60,61 @@
   <main class="main">
     <Error :error="errorModified"/>
 
-    <DayCard :weatherCode="1063" :temperature="15" :day="new Date()" />
-    <!-- Мультиплексирование статистики, данные которой динамичкси (передаём как html-аргкмент) могут пересчитываться и всавляться в шаблон -->
-    <Statistic v-for="item in statModifed" v-bind="item" :key="item.label"/>
+    <div v-if="statistic" class="stat-data">
+      <!-- Мультиплексирование информации о погоде, данные которой динамичкси (передаём как html-аргкмент) могут пересчитываться и всавляться в шаблон -->
+      <div class="stat-list">
+        <Statistic 
+          v-for="item in statModifed" 
+          v-bind="item" 
+          :key="item.label"
+        />
+      </div>
+      <div class="card-list">
+        <!-- Мультиплексирование карточек погоды -->
+        <DayCard 
+          v-for="item in statistic.forecast.forecastday" 
+          :key="item.date" 
+          :weatherCode="item.day.condition.code" 
+          :temperature="item.day.avgtemp_c" 
+          :day="new Date(item.date)" 
+        />
+      </div>
+    </div>
 
-    <SelectCity @selectCity="getCity" />
+    <div class="select-style">
+      <SelectCity @selectCity="getCity" />
+    </div>
   </main>
 </template>
 
 <style scoped>
   .main {
     background: var(--color-bg-main);
-    padding: 60px 50px;
+    padding: 30px 20px;
     border-radius: 25px;
+  }
+
+  .card-list{
+    display: flex;
+    gap: 1px;
+  }
+
+  .select-style{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .stat-data{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    margin: 70px;
+  }
+
+  .stat-list{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 </style>

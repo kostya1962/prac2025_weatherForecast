@@ -18,6 +18,6 @@
         background-color: var(--color-bg-info);
         border-radius: 0px 0px 25px 25px;
         margin-bottom: 60px;
-        margin-top: -60px;
+        margin-top: -30px;
     }
 </style>
