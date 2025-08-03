@@ -4,6 +4,9 @@
   import Statistic from "./components/Statistic.vue";
   import SelectCity from "./components/SelectCity.vue";
   import Error from './components/Error.vue';
+  import iconSun from './icons/weather/iconSun.vue';
+  import iconCloud from './icons/weather/iconCloud.vue';
+  import iconRain from './icons/weather/iconRain.vue';
 
   const API_ENDPOINT = "http://api.weatherapi.com/v1"; //домен источника информации о погоде
   
@@ -61,6 +64,10 @@
 <template>
   <main class="main">
     <Error :error="errorModified"/>
+
+    <iconSun size="95" color="green" />
+    <iconCloud />
+    <iconRain />
 
     <!-- Мультиплексирование статистики, данные которой динамичкси (передаём как html-аргкмент) могут пересчитываться и всавляться в шаблон -->
     <Statistic v-for="item in statModifed" v-bind="item" :key="item.label"/>
