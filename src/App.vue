@@ -1,6 +1,6 @@
 <!-- eslint-disable no-undef -->
 <script setup>
-  import { ref } from 'vue';
+  import { watch, onMounted, provide, ref } from 'vue';
   import PanelRight from "./components/PanelRight.vue";
 
   const API_ENDPOINT = "https://api.weatherapi.com/v1"; //домен источника информации о погоде
@@ -8,12 +8,13 @@
   
   const statistic = ref(); //реактивный объект статистики
   const error = ref(); //реактивное состояние для случая, когда сапрос к WeatherAPI вернулся с ошибкой
-  let activeIndex = ref(0); // метка активной карточки  
+  let activeIndex = ref(0); // метка активной карточки 
+  let city = ref("Чебоксары"); // реактивное имя города (изначально не определено)
 
+  provide("city", city); // прокидываем город в SelectCity через PanelRight
   
   // функция получения названия города из компонента SelectCity
   async function getCity(city) { 
-    console.log(city);
     const params = new URLSearchParams({ //для корректного преобразования списка параметров запроса в URL 
       q: city,
       lang: "ru",
@@ -28,8 +29,16 @@
     } 
     error.value = null;
     statistic.value = await res.json(); // преобразование строки в объект (так как строка JSON очень большая нужно дождаться завершения преобразования)
-    console.log(statistic.value);
   } 
+
+  onMounted(() => { // отправка запроса с начальным наименованием city 
+    getCity(city.value);
+  });
+
+  watch(city, () => { // отправка запроса всегда, когда будет изменена реактивная переменная city
+    getCity(city.value);
+  });
+  
   
 </script>
 
@@ -43,7 +52,6 @@
         :statistic
         :active-index="activeIndex" 
         @select-index="(index) => activeIndex = index" 
-        @select-city="getCity"
       />
     </div>
   </main>

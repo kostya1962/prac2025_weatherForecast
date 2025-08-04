@@ -18,9 +18,9 @@
     });
 
     const statData = computed(() => {
-        // if(!statistic){
-        //     return [];
-        // }
+        if(!statistic){
+            return [];
+        }
     return [
             {
             label: "Влажность",
@@ -70,7 +70,7 @@
     </div>
 
     <div class="select-style">
-        <SelectCity @select-city="(city) => emit('select-city', city)" />
+        <SelectCity  />
     </div>
 </template>
 
