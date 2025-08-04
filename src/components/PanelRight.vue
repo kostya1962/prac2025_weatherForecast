@@ -4,6 +4,7 @@
     import Error from './Error.vue';
     import SelectCity from './SelectCity.vue';
     import Statistic from './Statistic.vue';
+    import { errorMap } from '../myConst.js';
     
     const { error, statistic, activeIndex } = defineProps({
         error: Object, 
@@ -11,7 +12,7 @@
         activeIndex: Number,
     });
 
-    const errorMap = new Map([ [1006, "Не удалось найти город"] ]); // словарь возможных ошибок на русском
+    
 
     const errorModified = computed(() => { // по коду ошибки определяет (как ключ), какое сообщение об ошибке будет отображено
         return errorMap.get(error.error?.code);

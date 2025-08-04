@@ -2,8 +2,8 @@
 <script setup>
   import { watch, onMounted, provide, ref } from 'vue';
   import PanelRight from "./components/PanelRight.vue";
-
-  const API_ENDPOINT = "https://api.weatherapi.com/v1"; //домен источника информации о погоде
+  import { API_ENDPOINT, cityProvide } from './myConst.js';
+  
   
   
   const statistic = ref(); //реактивный объект статистики
@@ -11,7 +11,7 @@
   let activeIndex = ref(0); // метка активной карточки 
   let city = ref("Чебоксары"); // реактивное имя города (изначально не определено)
 
-  provide("city", city); // прокидываем город в SelectCity через PanelRight
+  provide(cityProvide, city); // прокидываем город в SelectCity через PanelRight
   
   // функция получения названия города из компонента SelectCity
   async function getCity(city) { 

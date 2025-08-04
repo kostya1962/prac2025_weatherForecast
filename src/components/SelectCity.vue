@@ -3,11 +3,12 @@ import { inject, ref } from 'vue';
 import Button from "./Button.vue";
 import iconLocation from "../icons/iconLocation.vue";
 import InputCity from './InputCity.vue';
+import { cityProvide } from '../myConst.js'
 
 let isEdited = ref(false); //реактивное состояние кнопки изменения города
 
 
-const city = inject("city"); // получаем реактивную переменную по идентификатору "city"
+const city = inject(cityProvide); // получаем реактивную переменную по идентификатору "city"
 const inputValue = ref(city.value); // строка переданная от поля ввода InputCity при нажатии на кнопку "Сохранить"
 
 function select() {
