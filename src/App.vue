@@ -59,6 +59,7 @@
     activeIndex.value = index;
   }
 
+  
 </script>
 
 <template>
