@@ -6,7 +6,7 @@
   import Error from './components/Error.vue';
   import DayCard from './components/DayCard.vue';
 
-  const API_ENDPOINT = "http://api.weatherapi.com/v1"; //домен источника информации о погоде
+  const API_ENDPOINT = "https://api.weatherapi.com/v1"; //домен источника информации о погоде
   
   //реактивный объект статистики
   const statistic = ref();
@@ -64,10 +64,9 @@
 
 <template>
   <main class="main">
-    <div class="up">
+    <div class="left"></div>
 
-    </div>
-    <div class="down">
+    <div class="right">
       <Error :error="errorModified"/>
 
       <div v-if="statistic" class="stat-data">
@@ -107,20 +106,31 @@
     justify-content: center;
   }
 
-  .down {
+  .right {
     background: var(--color-bg-main);
     padding: 30px 20px;
     border-radius: 0 25px 25px 0;
   }
 
-  .up{
+  .left{
     width: 500px;
     height: 710px;
     border-radius: 30px;
     background-image: url(assets/bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    overflow: hidden;
+    position: relative; 
   }
+
+  .left::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-img);
+    border-radius: 30px;
+}
 
   .card-list{
     display: flex;

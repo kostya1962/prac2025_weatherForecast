@@ -8,7 +8,7 @@
   --color-primary-inverted: #FDFFB4;
   --color-bg-card: #F9A723;
   --color-bg-main: #FACD37;
-  --gradient-img: linear-gradient(152.19deg, rgba(255, 234, 0, 0.9) -0.04%, rgba(255, 9, 9, 0.9) 100%);
+  --gradient-img: linear-gradient(152.19deg, rgba(255, 234, 0, 1) -0.04%, rgba(255, 9, 9, 0.8) 100%);
   --gradient-btn: linear-gradient(90.8deg, #FFEA00 0.2%, #FF0909 100%);
   --gradient-btn-invert: linear-gradient(90.8deg, #FF0909 0.2%, #FFEA00 100%);
   --color-text-placeholder: #3F4958;
