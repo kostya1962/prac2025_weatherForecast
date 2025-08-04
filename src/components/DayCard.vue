@@ -2,19 +2,26 @@
     import iconSun from '../icons/weather/iconSun.vue';
     import iconCloud from '../icons/weather/iconCloud.vue';
     import iconRain from '../icons/weather/iconRain.vue';
+    import { computed } from 'vue';
 
-    const { weatherCode, temperature, day } = defineProps({
+    const { weatherCode, temperature, day, isActive } = defineProps({
         weatherCode: Number,
         temperature: Number, 
         day: Date,
+        isActive: Boolean,
+    });
+
+    const iconColor = computed(() => { // функция для реактивного определения цевта иконки карточки
+        return isActive ? "var(--color-primary)" : "var(--color-primary-inverted)";
     });
 </script>
 
 <template>
-    <button class="card">
-        <iconSun v-show="weatherCode == 1000" />
-        <iconCloud v-show="weatherCode == 1003" />
-        <iconRain v-show="weatherCode == 1063" />
+    <!-- Реализация динамического класса, который активируется в случае, когда выражение после двоеточия истинно -->
+    <button class="card" :class="{ active: isActive} "> 
+        <iconSun v-show="weatherCode <= 1003" :color="iconColor" />
+        <iconCloud v-show="weatherCode >= 1006 && weatherCode < 1189" :color="iconColor" />
+        <iconRain v-show="weatherCode >= 1189" :color="iconColor" />
 
         <div class="week-day">
             <!-- получение дня недели из русской локали в сокращённом виде  -->
@@ -44,7 +51,7 @@
         width: 100%;
     }
 
-    .card:hover{
+    .card:not(.active):hover{
         background-color: #FFB33A;
     }
 
@@ -56,5 +63,10 @@
     .temp{
         font-size: 20px;
         font-weight: 700;
+    }
+
+    .active{
+        background-color: var(--color-primary-inverted);
+        color: var(--color-primary);
     }
 </style>

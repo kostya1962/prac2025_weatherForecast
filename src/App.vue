@@ -12,6 +12,7 @@
   const statistic = ref();
   //реактивное состояние для случая, когда сапрос к WeatherAPI вернулся с ошибкой
   const error = ref();
+  let activeIndex = ref(0); // метка активной карточки 
 
   const errorMap = new Map([ [1006, "Не удалось найти город"] ]); // словарь возможных ошибок на русском
   
@@ -54,6 +55,10 @@
     statistic.value = await res.json(); // преобразование строки в объект (так как строка JSON очень большая нужно дождаться завершения преобразования)
   }
 
+  function onCard(index) { // функция смены индекса активной карты
+    activeIndex.value = index;
+  }
+
 </script>
 
 <template>
@@ -72,17 +77,19 @@
       <div class="card-list">
         <!-- Мультиплексирование карточек погоды -->
         <DayCard 
-          v-for="item in statistic.forecast.forecastday" 
+          v-for="( item, index ) in statistic.forecast.forecastday" 
           :key="item.date" 
-          :weatherCode="item.day.condition.code" 
+          :weather-code="item.day.condition.code" 
           :temperature="item.day.avgtemp_c" 
           :day="new Date(item.date)" 
+          :is-active="activeIndex == index"
+          @click="onCard(index)"
         />
       </div>
     </div>
 
     <div class="select-style">
-      <SelectCity @selectCity="getCity" />
+      <SelectCity @select-city="getCity" />
     </div>
   </main>
 </template>
