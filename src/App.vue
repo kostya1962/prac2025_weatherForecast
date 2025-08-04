@@ -64,42 +64,62 @@
 
 <template>
   <main class="main">
-    <Error :error="errorModified"/>
+    <div class="up">
 
-    <div v-if="statistic" class="stat-data">
-      <!-- Мультиплексирование информации о погоде, данные которой динамичкси (передаём как html-аргкмент) могут пересчитываться и всавляться в шаблон -->
-      <div class="stat-list">
-        <Statistic 
-          v-for="item in statModifed" 
-          v-bind="item" 
-          :key="item.label"
-        />
-      </div>
-      <div class="card-list">
-        <!-- Мультиплексирование карточек погоды -->
-        <DayCard 
-          v-for="( item, index ) in statistic.forecast.forecastday" 
-          :key="item.date" 
-          :weather-code="item.day.condition.code" 
-          :temperature="item.day.avgtemp_c" 
-          :day="new Date(item.date)" 
-          :is-active="activeIndex == index"
-          @click="onCard(index)"
-        />
-      </div>
     </div>
+    <div class="down">
+      <Error :error="errorModified"/>
 
-    <div class="select-style">
-      <SelectCity @select-city="getCity" />
+      <div v-if="statistic" class="stat-data">
+        <!-- Мультиплексирование информации о погоде, данные которой динамичкси (передаём как html-аргкмент) могут пересчитываться и всавляться в шаблон -->
+        <div class="stat-list">
+          <Statistic 
+            v-for="item in statModifed" 
+            v-bind="item" 
+            :key="item.label"
+          />
+        </div>
+        <div class="card-list">
+          <!-- Мультиплексирование карточек погоды -->
+          <DayCard 
+            v-for="( item, index ) in statistic.forecast.forecastday" 
+            :key="item.date" 
+            :weather-code="item.day.condition.code" 
+            :temperature="item.day.avgtemp_c" 
+            :day="new Date(item.date)" 
+            :is-active="activeIndex == index"
+            @click="onCard(index)"
+          />
+        </div>
+      </div>
+
+      <div class="select-style">
+        <SelectCity @select-city="getCity" />
+      </div>
     </div>
   </main>
 </template>
 
 <style scoped>
-  .main {
+  .main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .down {
     background: var(--color-bg-main);
     padding: 30px 20px;
-    border-radius: 25px;
+    border-radius: 0 25px 25px 0;
+  }
+
+  .up{
+    width: 500px;
+    height: 710px;
+    border-radius: 30px;
+    background-image: url(assets/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .card-list{
