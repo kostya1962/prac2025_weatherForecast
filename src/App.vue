@@ -2,6 +2,7 @@
 <script setup>
   import { watch, onMounted, provide, ref } from 'vue';
   import PanelRight from "./components/PanelRight.vue";
+  import PanelLeft from "./components/PanelLeft.vue";
   import { API_ENDPOINT, cityProvide } from './myConst.js';
   
   
@@ -44,7 +45,13 @@
 
 <template>
   <main class="main">
-    <div class="left"></div>
+    <div class="left">
+      <PanelLeft 
+        v-if="statistic" 
+        :day="statistic.forecast.forecastday[activeIndex]" 
+        class="text
+      "/>
+    </div>
 
     <div class="right">
       <PanelRight 
@@ -90,4 +97,8 @@
     border-radius: 30px;
 }
 
+.text{
+  position: relative;
+  /* z-index: 1; */
+}
 </style>
