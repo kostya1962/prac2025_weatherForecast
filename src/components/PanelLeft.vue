@@ -38,7 +38,7 @@
 
 <template>
     <div class="panelLeft">
-        <div>
+        <div class="day">
             <div class="week-day">
                 {{ weekDay }}
             </div>
@@ -76,6 +76,10 @@
     
     justify-content: space-between;
     height: 100%;
+}
+
+.day{
+    padding: 10px 5px;
 }
 
 .week-day{

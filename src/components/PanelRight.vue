@@ -25,15 +25,15 @@
     return [
             {
             label: "Влажность",
-            stat: statistic.current.humidity + ' %', //вычисляемая часть
+            stat: statistic.forecast.forecastday[activeIndex].day.avghumidity + ' %', //вычисляемая часть
             },
             {
-            label: "Облачность",
-            stat: statistic.current.cloud + ' %',
+            label: "Вероятность дождя",
+            stat: statistic.forecast.forecastday[activeIndex].day.daily_chance_of_rain + ' %',
             },
             {
             label: "Ветер",
-            stat: (Math.round(parseInt(statistic.current.wind_kph) * (1000 / 3600) * 10) / 10) + ' м/с',
+            stat: (Math.round(parseInt(statistic.forecast.forecastday[activeIndex].day.maxwind_kph) * (1000 / 3600) * 10) / 10) + ' м/с',
             }
         ]
     });
