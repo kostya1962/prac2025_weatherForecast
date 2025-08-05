@@ -37,13 +37,15 @@
 </script>
 
 <template>
-    <div class="panelLeft">
+    <div class="panelUp">
         <div class="day">
-            <div class="week-day">
-                {{ weekDay }}
-            </div>
-            <div class="full-day">
-                {{ fullDay }}
+            <div>
+                <div class="week-day">
+                    {{ weekDay }}
+                </div>
+                <div class="full-day">
+                    {{ fullDay }}
+                </div>
             </div>
             <div class="city">
                 <iconLocation :color="'var(--color-primary)'" />
@@ -51,14 +53,16 @@
             </div>
         </div>
 
-        <div>
-            <div class="icon">
-                <iconSun v-show="weatherCode <= 1003" :color="'var(--color-primary)'" size="95" />
-                <iconCloud v-show="weatherCode >= 1006 && weatherCode < 1189" :color="'var(--color-primary)'" size="95" />
-                <iconRain v-show="weatherCode >= 1189" :color="'var(--color-primary)'" size="95" />
-            </div>
-            <div class="temp">
-                {{ tempValue }}
+        <div class="condTemp">
+            <div class="iconTemp">
+                <div class="icon">
+                    <iconSun v-show="weatherCode <= 1003" :color="'var(--color-primary)'" size="90" />
+                    <iconCloud v-show="weatherCode >= 1006 && weatherCode < 1189" :color="'var(--color-primary)'" size="90" />
+                    <iconRain v-show="weatherCode >= 1189" :color="'var(--color-primary)'" size="90" />
+                </div>
+                <div class="temp">
+                    {{ tempValue }}
+                </div>
             </div>
             <div class="condition">
                 {{ day.day.condition.text }}
@@ -69,9 +73,8 @@
 </template>
 
 <style scoped>
-.panelLeft{
+.panelUp{
     display: flex;
-    flex-direction: column;
     padding: 48px 23px;
     
     justify-content: space-between;
@@ -80,6 +83,9 @@
 
 .day{
     padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .week-day{
@@ -101,6 +107,15 @@
     align-items: center;
 }
 
+.condTemp{
+    display: flex;
+    flex-direction: column;
+}
+
+.iconTemp{
+    display: flex;
+}
+
 .icon{
     margin: 25px;
 }
@@ -108,12 +123,14 @@
 .temp{
     font-size: 45px;
     font-weight: 700;
+    padding-top: 25px;
     margin-bottom: 9px;
+    margin-left: 40px;
 }
 
 .condition{
     font-size: 22px;
     font-weight: 700;
-
+    text-align: right;
 }
 </style>

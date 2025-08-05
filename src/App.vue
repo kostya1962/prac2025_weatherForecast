@@ -1,8 +1,8 @@
 <!-- eslint-disable no-undef -->
 <script setup>
   import { watch, onMounted, provide, ref } from 'vue';
-  import PanelRight from "./components/PanelRight.vue";
-  import PanelLeft from "./components/PanelLeft.vue";
+  import PanelDawn from "./components/PanelDawn.vue";
+  import PanelUp from "./components/PanelUp.vue";
   import { API_ENDPOINT, cityProvide } from './myConst.js';
   
   
@@ -48,16 +48,16 @@
 
 <template>
   <main class="main">
-    <div class="left">
-      <PanelLeft 
+    <div class="up">
+      <PanelUp 
         v-if="statistic" 
         :day="statistic.forecast.forecastday[activeIndex]" 
         class="text
       "/>
     </div>
 
-    <div class="right">
-      <PanelRight 
+    <div class="dawn">
+      <PanelDawn 
         :error
         :statistic
         :active-index="activeIndex" 
@@ -72,17 +72,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
   }
 
-  .right {
+  .dawn {
     background: var(--color-bg-main);
     padding: 30px 20px;
-    border-radius: 0 25px 25px 0;
+    border-radius: 0 0 25px 25px;
   }
 
-  .left{
-    width: 500px;
-    height: 710px;
+  .up{
+    width: 1150px;
+    height: 500px;
     border-radius: 30px;
     background-image: url(assets/bg.jpg);
     background-repeat: no-repeat;
@@ -91,7 +92,7 @@
     position: relative; 
   }
 
-  .left::before {
+  .up::before {
     content: "";
     position: absolute;
     width: 100%;
