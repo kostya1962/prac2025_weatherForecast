@@ -4,6 +4,7 @@
   import PanelDawn from "./components/PanelDawn.vue";
   import PanelUp from "./components/PanelUp.vue";
   import { API_ENDPOINT, cityProvide } from './myConst.js';
+  import { hardData } from '../hardData.js'
   
   
   
@@ -19,7 +20,7 @@
     const params = new URLSearchParams({ //для корректного преобразования списка параметров запроса в URL 
       q: city,
       lang: "ru",
-      key: "7317922310d4482ba14192432250208", // небезопасный способ хранения ключа аутентификации
+      key: "3faa8979683e41b1bc9222426252808", // небезопасный способ хранения ключа аутентификации
       days: 7,
     });
 
