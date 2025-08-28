@@ -4,7 +4,6 @@
   import PanelDawn from "./components/PanelDawn.vue";
   import PanelUp from "./components/PanelUp.vue";
   import { API_ENDPOINT, cityProvide } from './myConst.js';
-  import { hardData } from '../hardData.js'
   
   
   
